@@ -115,6 +115,20 @@ RSpec.describe LinkedList do
       expect(new_list).to eq [0,1,10,2,3,4]
     end
 
+    it "Inserts at the front given 0 index" do
+      set_nodes
+      l.insert(0, 10)
+      new_list = list_elements(l.first)
+      expect(new_list).to eq [10,0,1,2,3,4]
+    end
+
+    it "Inserts at the end given last index" do
+      set_nodes
+      l.insert(4, 10)
+      new_list = list_elements(l.first)
+      expect(new_list).to eq [0,1,2,3,4,10]
+    end
+
     it "Links back properly" do
       set_nodes
       l.insert(2, 10)
