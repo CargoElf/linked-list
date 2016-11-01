@@ -40,6 +40,13 @@ RSpec.describe LinkedList do
     it "Returns nil if there are no nodes" do
       expect(l.remove_first).to eq nil
     end
+
+    it "Links back properly" do
+      set_nodes
+      l.insert_first(5)
+      new_list = list_elements_backwards(l.last_node)
+      expect(new_list).to eq [4,3,2,1,0,5]
+    end
   end
 
   describe "Last Node" do
