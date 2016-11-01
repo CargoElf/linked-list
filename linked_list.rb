@@ -14,8 +14,6 @@ class LinkedList
       @first = new_node
       @last_node = new_node
     else
-      # new_node.insert_after(@first)
-      # @first.insert_before(new_node)
       set_links(@first, new_node)
       @first = new_node
     end
@@ -47,6 +45,7 @@ class LinkedList
   end
 
   def get(index)
+    return @last_node if index == count - 1
     nodes = @first
     index.times do
       nodes = nodes.reference
@@ -62,6 +61,7 @@ class LinkedList
 
   def insert(index, element)
     return insert_first(element) if index == 0
+    return insert_last(element) if index == count - 1
     increment_count
     nodes = @first
     before = nil
@@ -71,10 +71,8 @@ class LinkedList
     end
     new_node = Node.new(element)
     before.remove_after
-    before.insert_after(new_node)
-    new_node.insert_before(before)
-    before.reference.insert_after(nodes)
-    nodes.insert_before(before.reference)
+    set_links(new_node, before)
+    set_links(nodes, before.reference)
   end
 
   def size(i = 0, nodes = @first)
