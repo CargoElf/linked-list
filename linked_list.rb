@@ -45,6 +45,7 @@ class LinkedList
   end
 
   def get(index)
+    return nil unless in_bound?(index)
     if index < (count - 1) / 2
       nodes = @first
       method = "reference"
@@ -61,6 +62,7 @@ class LinkedList
   end
 
   def set(index, element)
+    return nil unless in_bound?(index)
     node = get(index)
     node.element = element
     node
@@ -69,6 +71,7 @@ class LinkedList
   def insert(index, element)
     return insert_first(element) if index == 0
     return insert_last(element) if index == count - 1
+    return nil unless in_bound?(index)
     increment_count
     nodes = get(index).reference
     before = nodes.link_back
@@ -96,6 +99,10 @@ class LinkedList
 
   def decriment_count
     @count -= 1
+  end
+
+  def in_bound?(index)
+    index < @count && index >= 0
   end
 
 end
