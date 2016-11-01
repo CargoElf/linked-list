@@ -45,10 +45,17 @@ class LinkedList
   end
 
   def get(index)
-    return @last_node if index == count - 1
-    nodes = @first
-    index.times do
-      nodes = nodes.reference
+    if index < (count - 1) / 2
+      nodes = @first
+      method = "reference"
+      loop_num = (index)
+    else
+      nodes = @last_node
+      method = "link_back"
+      loop_num = (count - 1 - index)
+    end
+    loop_num.times do
+      nodes = nodes.send(method)
     end
     nodes
   end
@@ -63,12 +70,8 @@ class LinkedList
     return insert_first(element) if index == 0
     return insert_last(element) if index == count - 1
     increment_count
-    nodes = @first
-    before = nil
-    (index).times do
-      before = nodes
-      nodes = nodes.reference
-    end
+    nodes = get(index).reference
+    before = nodes.link_back
     new_node = Node.new(element)
     before.remove_after
     set_links(new_node, before)

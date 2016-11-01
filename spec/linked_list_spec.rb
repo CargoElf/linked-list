@@ -90,6 +90,21 @@ RSpec.describe LinkedList do
       set_nodes
       expect(l.get(2).element).to eq 2
     end
+
+    it "Returns the node at a given index" do
+      set_nodes
+      expect(l.get(1).element).to eq 1
+    end
+
+    it "Returns the first node given 0" do
+      set_nodes
+      expect(l.get(0)).to eq l.first
+    end
+
+    it "Returns the last node given last index" do
+      set_nodes
+      expect(l.get(4)).to eq l.last_node
+    end
   end
 
   describe "Insert" do
