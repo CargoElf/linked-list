@@ -69,9 +69,9 @@ class LinkedList
   end
 
   def insert(index, element)
+    return nil unless in_bound?(index)
     return insert_first(element) if index == 0
     return insert_last(element) if index == count - 1
-    return nil unless in_bound?(index)
     increment_count
     nodes = get(index).reference
     before = nodes.link_back
